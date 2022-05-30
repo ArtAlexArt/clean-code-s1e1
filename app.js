@@ -7,21 +7,27 @@
 
 // Event handling, user interaction is what starts the code execution.
 
-var taskInput = document.getElementById("new-task");//Add a new task.
-var addButton = document.getElementsByTagName("button")[0];//first button
-var incompleteTaskHolder = document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
-var completedTasksHolder = document.getElementById("completed-tasks");//completed-tasks
+//Add a new task.
+var taskInput = document.getElementById("new-task");
+
+//first button
+var addButton = document.getElementsByTagName("button")[0];
+
+//ul of #incomplete-tasks
+var incompleteTaskHolder = document.getElementById("incomplete-tasks");
+
+var completedTasksHolder = document.getElementById("completed-tasks");
 
 //New task list item
 var createNewTaskElement = function (taskString) {
 
   var listItem = document.createElement("li");
-  var checkBox = document.createElement("input");//checkbx
-  var label = document.createElement("label");//label
-  var editInput = document.createElement("input");//input (text)
-  var editButton = document.createElement("button");//button.edit
-  var deleteButton = document.createElement("button");//delete button
-  var deleteButtonImg = document.createElement("img");//delete button image
+  var checkBox = document.createElement("input");
+  var label = document.createElement("label");
+  var editInput = document.createElement("input");
+  var editButton = document.createElement("button");
+  var deleteButton = document.createElement("button");
+  var deleteButtonImg = document.createElement("img");
 
   label.innerText = taskString;
   label.className = "task";
@@ -30,7 +36,7 @@ var createNewTaskElement = function (taskString) {
   checkBox.type = "checkbox";
   editInput.type = "text";
   editInput.className = "task";
-  editButton.innerText = "Edit"; //innerText encodes special characters, HTML does not.
+  editButton.innerText = "Edit"; 
   editButton.className = "edit";
   deleteButton.className = "delete";
   deleteButtonImg.src = "./remove.svg";
@@ -73,19 +79,13 @@ var editTask = function () {
   var editBtn = listItem.querySelector(".edit");
   var containsClass = listItem.classList.contains("edit-mode");
   
-  //If class of the parent is .editmode
+  //If class of the parent is .editmode. Switch to .editmode
   if (containsClass) {
-
-    //switch to .editmode
-    //label becomes the inputs value.
     label.innerText = editInput.value;
     editBtn.innerText = "Edit";
-
   } else {
-
     editInput.value = label.innerText;
     editBtn.innerText = "Save";
-
   }
 
   //toggle .editmode on the parent.
@@ -98,6 +98,7 @@ var deleteTask = function () {
   console.log("Delete Task...");
   var listItem = this.parentNode;
   var ul = listItem.parentNode;
+
   //Remove the parent list item from the ul.
   ul.removeChild(listItem);
 
@@ -110,6 +111,7 @@ var taskCompleted = function () {
 
   //Append the task list item to the #completed-tasks
   var listItem = this.parentNode;
+
   completedTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 
@@ -119,10 +121,10 @@ var taskIncomplete = function () {
 
   console.log("Incomplete Task...");
 
-  //Mark task as incomplete.
-  //When the checkbox is unchecked
+  //Mark task as incomplete. When the checkbox is unchecked
   //Append the task list item to the #incompleteTasks.
   var listItem = this.parentNode;
+
   incompleteTaskHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 
@@ -178,5 +180,4 @@ for (var i = 0; i < completedTasksHolder.children.length; i++) {
 }
 
 // Issues with usability don"t get seen until they are in front of a human tester.
-//prevent creation of empty tasks.
-//Change edit to save when you are in edit mode.
+//prevent creation of empty tasks.Change edit to save when you are in edit mode.
